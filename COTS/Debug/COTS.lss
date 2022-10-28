@@ -1,0 +1,522 @@
+
+COTS.elf:     file format elf32-avr
+
+Sections:
+Idx Name          Size      VMA       LMA       File off  Algn
+  0 .text         00000360  00000000  00000000  00000074  2**1
+                  CONTENTS, ALLOC, LOAD, READONLY, CODE
+  1 .data         00000000  00800060  00800060  000003d4  2**0
+                  CONTENTS, ALLOC, LOAD, DATA
+  2 .bss          00000012  00800060  00800060  000003d4  2**0
+                  ALLOC
+  3 .comment      00000030  00000000  00000000  000003d4  2**0
+                  CONTENTS, READONLY
+  4 .note.gnu.avr.deviceinfo 0000003c  00000000  00000000  00000404  2**2
+                  CONTENTS, READONLY
+  5 .debug_aranges 00000170  00000000  00000000  00000440  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  6 .debug_info   00000cab  00000000  00000000  000005b0  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  7 .debug_abbrev 0000081a  00000000  00000000  0000125b  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  8 .debug_line   0000071b  00000000  00000000  00001a75  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  9 .debug_frame  000004dc  00000000  00000000  00002190  2**2
+                  CONTENTS, READONLY, DEBUGGING
+ 10 .debug_str    000005fb  00000000  00000000  0000266c  2**0
+                  CONTENTS, READONLY, DEBUGGING
+ 11 .debug_loc    000007d4  00000000  00000000  00002c67  2**0
+                  CONTENTS, READONLY, DEBUGGING
+ 12 .debug_ranges 00000120  00000000  00000000  0000343b  2**0
+                  CONTENTS, READONLY, DEBUGGING
+
+Disassembly of section .text:
+
+00000000 <__vectors>:
+   0:	0c 94 2a 00 	jmp	0x54	; 0x54 <__ctors_end>
+   4:	0c 94 76 00 	jmp	0xec	; 0xec <__vector_1>
+   8:	0c 94 9d 00 	jmp	0x13a	; 0x13a <__vector_2>
+   c:	0c 94 c4 00 	jmp	0x188	; 0x188 <__vector_3>
+  10:	0c 94 47 00 	jmp	0x8e	; 0x8e <__bad_interrupt>
+  14:	0c 94 47 00 	jmp	0x8e	; 0x8e <__bad_interrupt>
+  18:	0c 94 60 01 	jmp	0x2c0	; 0x2c0 <__vector_6>
+  1c:	0c 94 39 01 	jmp	0x272	; 0x272 <__vector_7>
+  20:	0c 94 47 00 	jmp	0x8e	; 0x8e <__bad_interrupt>
+  24:	0c 94 87 01 	jmp	0x30e	; 0x30e <__vector_9>
+  28:	0c 94 eb 00 	jmp	0x1d6	; 0x1d6 <__vector_10>
+  2c:	0c 94 12 01 	jmp	0x224	; 0x224 <__vector_11>
+  30:	0c 94 47 00 	jmp	0x8e	; 0x8e <__bad_interrupt>
+  34:	0c 94 47 00 	jmp	0x8e	; 0x8e <__bad_interrupt>
+  38:	0c 94 47 00 	jmp	0x8e	; 0x8e <__bad_interrupt>
+  3c:	0c 94 47 00 	jmp	0x8e	; 0x8e <__bad_interrupt>
+  40:	0c 94 4a 00 	jmp	0x94	; 0x94 <__vector_16>
+  44:	0c 94 47 00 	jmp	0x8e	; 0x8e <__bad_interrupt>
+  48:	0c 94 47 00 	jmp	0x8e	; 0x8e <__bad_interrupt>
+  4c:	0c 94 47 00 	jmp	0x8e	; 0x8e <__bad_interrupt>
+  50:	0c 94 47 00 	jmp	0x8e	; 0x8e <__bad_interrupt>
+
+00000054 <__ctors_end>:
+  54:	11 24       	eor	r1, r1
+  56:	1f be       	out	0x3f, r1	; 63
+  58:	cf e5       	ldi	r28, 0x5F	; 95
+  5a:	d8 e0       	ldi	r29, 0x08	; 8
+  5c:	de bf       	out	0x3e, r29	; 62
+  5e:	cd bf       	out	0x3d, r28	; 61
+
+00000060 <__do_copy_data>:
+  60:	10 e0       	ldi	r17, 0x00	; 0
+  62:	a0 e6       	ldi	r26, 0x60	; 96
+  64:	b0 e0       	ldi	r27, 0x00	; 0
+  66:	e0 e6       	ldi	r30, 0x60	; 96
+  68:	f3 e0       	ldi	r31, 0x03	; 3
+  6a:	02 c0       	rjmp	.+4      	; 0x70 <__do_copy_data+0x10>
+  6c:	05 90       	lpm	r0, Z+
+  6e:	0d 92       	st	X+, r0
+  70:	a0 36       	cpi	r26, 0x60	; 96
+  72:	b1 07       	cpc	r27, r17
+  74:	d9 f7       	brne	.-10     	; 0x6c <__do_copy_data+0xc>
+
+00000076 <__do_clear_bss>:
+  76:	20 e0       	ldi	r18, 0x00	; 0
+  78:	a0 e6       	ldi	r26, 0x60	; 96
+  7a:	b0 e0       	ldi	r27, 0x00	; 0
+  7c:	01 c0       	rjmp	.+2      	; 0x80 <.do_clear_bss_start>
+
+0000007e <.do_clear_bss_loop>:
+  7e:	1d 92       	st	X+, r1
+
+00000080 <.do_clear_bss_start>:
+  80:	a2 37       	cpi	r26, 0x72	; 114
+  82:	b2 07       	cpc	r27, r18
+  84:	e1 f7       	brne	.-8      	; 0x7e <.do_clear_bss_loop>
+  86:	0e 94 49 00 	call	0x92	; 0x92 <main>
+  8a:	0c 94 ae 01 	jmp	0x35c	; 0x35c <_exit>
+
+0000008e <__bad_interrupt>:
+  8e:	0c 94 00 00 	jmp	0	; 0x0 <__vectors>
+
+00000092 <main>:
+#include "../HAL/BTN/BTN_int.h"
+#include "../MCAL/DIO/DIO_int.h"
+#include "../HAL/LCD/LCD_int.h"
+
+int main(void)
+{
+  92:	ff cf       	rjmp	.-2      	; 0x92 <main>
+
+00000094 <__vector_16>:
+	/* Start Conversion */
+	SET_BIT(ADCSRA,ADSC);
+	
+}
+
+void __vector_16(void){
+  94:	1f 92       	push	r1
+  96:	0f 92       	push	r0
+  98:	0f b6       	in	r0, 0x3f	; 63
+  9a:	0f 92       	push	r0
+  9c:	11 24       	eor	r1, r1
+  9e:	2f 93       	push	r18
+  a0:	3f 93       	push	r19
+  a2:	4f 93       	push	r20
+  a4:	5f 93       	push	r21
+  a6:	6f 93       	push	r22
+  a8:	7f 93       	push	r23
+  aa:	8f 93       	push	r24
+  ac:	9f 93       	push	r25
+  ae:	af 93       	push	r26
+  b0:	bf 93       	push	r27
+  b2:	ef 93       	push	r30
+  b4:	ff 93       	push	r31
+	G_ptr_func(ADC_DATA);
+  b6:	84 b1       	in	r24, 0x04	; 4
+  b8:	95 b1       	in	r25, 0x05	; 5
+  ba:	e0 91 70 00 	lds	r30, 0x0070	; 0x800070 <G_ptr_func>
+  be:	f0 91 71 00 	lds	r31, 0x0071	; 0x800071 <G_ptr_func+0x1>
+  c2:	09 95       	icall
+	CLR_BIT(ADCSRA,ADIE);
+  c4:	86 b1       	in	r24, 0x06	; 6
+  c6:	87 7f       	andi	r24, 0xF7	; 247
+  c8:	86 b9       	out	0x06, r24	; 6
+  ca:	ff 91       	pop	r31
+  cc:	ef 91       	pop	r30
+  ce:	bf 91       	pop	r27
+  d0:	af 91       	pop	r26
+  d2:	9f 91       	pop	r25
+  d4:	8f 91       	pop	r24
+  d6:	7f 91       	pop	r23
+  d8:	6f 91       	pop	r22
+  da:	5f 91       	pop	r21
+  dc:	4f 91       	pop	r20
+  de:	3f 91       	pop	r19
+  e0:	2f 91       	pop	r18
+  e2:	0f 90       	pop	r0
+  e4:	0f be       	out	0x3f, r0	; 63
+  e6:	0f 90       	pop	r0
+  e8:	1f 90       	pop	r1
+  ea:	18 95       	reti
+
+000000ec <__vector_1>:
+		case INT1_ID: 	G_ISR1_Ptr = ISR_Ptr; break;
+		case INT2_ID: 	G_ISR2_Ptr = ISR_Ptr; break;
+	}
+}
+
+void __vector_1(void){
+  ec:	1f 92       	push	r1
+  ee:	0f 92       	push	r0
+  f0:	0f b6       	in	r0, 0x3f	; 63
+  f2:	0f 92       	push	r0
+  f4:	11 24       	eor	r1, r1
+  f6:	2f 93       	push	r18
+  f8:	3f 93       	push	r19
+  fa:	4f 93       	push	r20
+  fc:	5f 93       	push	r21
+  fe:	6f 93       	push	r22
+ 100:	7f 93       	push	r23
+ 102:	8f 93       	push	r24
+ 104:	9f 93       	push	r25
+ 106:	af 93       	push	r26
+ 108:	bf 93       	push	r27
+ 10a:	ef 93       	push	r30
+ 10c:	ff 93       	push	r31
+	G_ISR0_Ptr();
+ 10e:	e0 91 64 00 	lds	r30, 0x0064	; 0x800064 <G_ISR0_Ptr>
+ 112:	f0 91 65 00 	lds	r31, 0x0065	; 0x800065 <G_ISR0_Ptr+0x1>
+ 116:	09 95       	icall
+}
+ 118:	ff 91       	pop	r31
+ 11a:	ef 91       	pop	r30
+ 11c:	bf 91       	pop	r27
+ 11e:	af 91       	pop	r26
+ 120:	9f 91       	pop	r25
+ 122:	8f 91       	pop	r24
+ 124:	7f 91       	pop	r23
+ 126:	6f 91       	pop	r22
+ 128:	5f 91       	pop	r21
+ 12a:	4f 91       	pop	r20
+ 12c:	3f 91       	pop	r19
+ 12e:	2f 91       	pop	r18
+ 130:	0f 90       	pop	r0
+ 132:	0f be       	out	0x3f, r0	; 63
+ 134:	0f 90       	pop	r0
+ 136:	1f 90       	pop	r1
+ 138:	18 95       	reti
+
+0000013a <__vector_2>:
+
+void __vector_2(void){
+ 13a:	1f 92       	push	r1
+ 13c:	0f 92       	push	r0
+ 13e:	0f b6       	in	r0, 0x3f	; 63
+ 140:	0f 92       	push	r0
+ 142:	11 24       	eor	r1, r1
+ 144:	2f 93       	push	r18
+ 146:	3f 93       	push	r19
+ 148:	4f 93       	push	r20
+ 14a:	5f 93       	push	r21
+ 14c:	6f 93       	push	r22
+ 14e:	7f 93       	push	r23
+ 150:	8f 93       	push	r24
+ 152:	9f 93       	push	r25
+ 154:	af 93       	push	r26
+ 156:	bf 93       	push	r27
+ 158:	ef 93       	push	r30
+ 15a:	ff 93       	push	r31
+	G_ISR1_Ptr();
+ 15c:	e0 91 62 00 	lds	r30, 0x0062	; 0x800062 <G_ISR1_Ptr>
+ 160:	f0 91 63 00 	lds	r31, 0x0063	; 0x800063 <G_ISR1_Ptr+0x1>
+ 164:	09 95       	icall
+}
+ 166:	ff 91       	pop	r31
+ 168:	ef 91       	pop	r30
+ 16a:	bf 91       	pop	r27
+ 16c:	af 91       	pop	r26
+ 16e:	9f 91       	pop	r25
+ 170:	8f 91       	pop	r24
+ 172:	7f 91       	pop	r23
+ 174:	6f 91       	pop	r22
+ 176:	5f 91       	pop	r21
+ 178:	4f 91       	pop	r20
+ 17a:	3f 91       	pop	r19
+ 17c:	2f 91       	pop	r18
+ 17e:	0f 90       	pop	r0
+ 180:	0f be       	out	0x3f, r0	; 63
+ 182:	0f 90       	pop	r0
+ 184:	1f 90       	pop	r1
+ 186:	18 95       	reti
+
+00000188 <__vector_3>:
+
+void __vector_3(void){
+ 188:	1f 92       	push	r1
+ 18a:	0f 92       	push	r0
+ 18c:	0f b6       	in	r0, 0x3f	; 63
+ 18e:	0f 92       	push	r0
+ 190:	11 24       	eor	r1, r1
+ 192:	2f 93       	push	r18
+ 194:	3f 93       	push	r19
+ 196:	4f 93       	push	r20
+ 198:	5f 93       	push	r21
+ 19a:	6f 93       	push	r22
+ 19c:	7f 93       	push	r23
+ 19e:	8f 93       	push	r24
+ 1a0:	9f 93       	push	r25
+ 1a2:	af 93       	push	r26
+ 1a4:	bf 93       	push	r27
+ 1a6:	ef 93       	push	r30
+ 1a8:	ff 93       	push	r31
+	G_ISR2_Ptr();
+ 1aa:	e0 91 60 00 	lds	r30, 0x0060	; 0x800060 <__DATA_REGION_ORIGIN__>
+ 1ae:	f0 91 61 00 	lds	r31, 0x0061	; 0x800061 <__DATA_REGION_ORIGIN__+0x1>
+ 1b2:	09 95       	icall
+ 1b4:	ff 91       	pop	r31
+ 1b6:	ef 91       	pop	r30
+ 1b8:	bf 91       	pop	r27
+ 1ba:	af 91       	pop	r26
+ 1bc:	9f 91       	pop	r25
+ 1be:	8f 91       	pop	r24
+ 1c0:	7f 91       	pop	r23
+ 1c2:	6f 91       	pop	r22
+ 1c4:	5f 91       	pop	r21
+ 1c6:	4f 91       	pop	r20
+ 1c8:	3f 91       	pop	r19
+ 1ca:	2f 91       	pop	r18
+ 1cc:	0f 90       	pop	r0
+ 1ce:	0f be       	out	0x3f, r0	; 63
+ 1d0:	0f 90       	pop	r0
+ 1d2:	1f 90       	pop	r1
+ 1d4:	18 95       	reti
+
+000001d6 <__vector_10>:
+	G_PTRF_TIM0_CTC = Fptr;
+}
+
+
+/* ISR for CTC Event */
+void __vector_10(void){
+ 1d6:	1f 92       	push	r1
+ 1d8:	0f 92       	push	r0
+ 1da:	0f b6       	in	r0, 0x3f	; 63
+ 1dc:	0f 92       	push	r0
+ 1de:	11 24       	eor	r1, r1
+ 1e0:	2f 93       	push	r18
+ 1e2:	3f 93       	push	r19
+ 1e4:	4f 93       	push	r20
+ 1e6:	5f 93       	push	r21
+ 1e8:	6f 93       	push	r22
+ 1ea:	7f 93       	push	r23
+ 1ec:	8f 93       	push	r24
+ 1ee:	9f 93       	push	r25
+ 1f0:	af 93       	push	r26
+ 1f2:	bf 93       	push	r27
+ 1f4:	ef 93       	push	r30
+ 1f6:	ff 93       	push	r31
+	/*Execute The  ISR [User Routine] */
+	G_PTRF_TIM0_CTC();
+ 1f8:	e0 91 66 00 	lds	r30, 0x0066	; 0x800066 <G_PTRF_TIM0_CTC>
+ 1fc:	f0 91 67 00 	lds	r31, 0x0067	; 0x800067 <G_PTRF_TIM0_CTC+0x1>
+ 200:	09 95       	icall
+}
+ 202:	ff 91       	pop	r31
+ 204:	ef 91       	pop	r30
+ 206:	bf 91       	pop	r27
+ 208:	af 91       	pop	r26
+ 20a:	9f 91       	pop	r25
+ 20c:	8f 91       	pop	r24
+ 20e:	7f 91       	pop	r23
+ 210:	6f 91       	pop	r22
+ 212:	5f 91       	pop	r21
+ 214:	4f 91       	pop	r20
+ 216:	3f 91       	pop	r19
+ 218:	2f 91       	pop	r18
+ 21a:	0f 90       	pop	r0
+ 21c:	0f be       	out	0x3f, r0	; 63
+ 21e:	0f 90       	pop	r0
+ 220:	1f 90       	pop	r1
+ 222:	18 95       	reti
+
+00000224 <__vector_11>:
+
+/* ISR for OVF Event */
+void __vector_11(void){
+ 224:	1f 92       	push	r1
+ 226:	0f 92       	push	r0
+ 228:	0f b6       	in	r0, 0x3f	; 63
+ 22a:	0f 92       	push	r0
+ 22c:	11 24       	eor	r1, r1
+ 22e:	2f 93       	push	r18
+ 230:	3f 93       	push	r19
+ 232:	4f 93       	push	r20
+ 234:	5f 93       	push	r21
+ 236:	6f 93       	push	r22
+ 238:	7f 93       	push	r23
+ 23a:	8f 93       	push	r24
+ 23c:	9f 93       	push	r25
+ 23e:	af 93       	push	r26
+ 240:	bf 93       	push	r27
+ 242:	ef 93       	push	r30
+ 244:	ff 93       	push	r31
+	/*Execute The  ISR [User Routine] */
+	G_PTRF_TIM0_OVF();
+ 246:	e0 91 68 00 	lds	r30, 0x0068	; 0x800068 <G_PTRF_TIM0_OVF>
+ 24a:	f0 91 69 00 	lds	r31, 0x0069	; 0x800069 <G_PTRF_TIM0_OVF+0x1>
+ 24e:	09 95       	icall
+}
+ 250:	ff 91       	pop	r31
+ 252:	ef 91       	pop	r30
+ 254:	bf 91       	pop	r27
+ 256:	af 91       	pop	r26
+ 258:	9f 91       	pop	r25
+ 25a:	8f 91       	pop	r24
+ 25c:	7f 91       	pop	r23
+ 25e:	6f 91       	pop	r22
+ 260:	5f 91       	pop	r21
+ 262:	4f 91       	pop	r20
+ 264:	3f 91       	pop	r19
+ 266:	2f 91       	pop	r18
+ 268:	0f 90       	pop	r0
+ 26a:	0f be       	out	0x3f, r0	; 63
+ 26c:	0f 90       	pop	r0
+ 26e:	1f 90       	pop	r1
+ 270:	18 95       	reti
+
+00000272 <__vector_7>:
+	else{
+		CLR_BIT(TCCR1B,ICES1);
+	}
+}
+void TIM1_vDisableInt(){
+	CLR_BIT(TIMSK,TICIE1);
+ 272:	1f 92       	push	r1
+ 274:	0f 92       	push	r0
+ 276:	0f b6       	in	r0, 0x3f	; 63
+ 278:	0f 92       	push	r0
+ 27a:	11 24       	eor	r1, r1
+ 27c:	2f 93       	push	r18
+ 27e:	3f 93       	push	r19
+ 280:	4f 93       	push	r20
+ 282:	5f 93       	push	r21
+ 284:	6f 93       	push	r22
+ 286:	7f 93       	push	r23
+ 288:	8f 93       	push	r24
+ 28a:	9f 93       	push	r25
+ 28c:	af 93       	push	r26
+ 28e:	bf 93       	push	r27
+ 290:	ef 93       	push	r30
+ 292:	ff 93       	push	r31
+ 294:	e0 91 6e 00 	lds	r30, 0x006E	; 0x80006e <G_PTRF_TIM1_FAST_PWM_ICR1>
+ 298:	f0 91 6f 00 	lds	r31, 0x006F	; 0x80006f <G_PTRF_TIM1_FAST_PWM_ICR1+0x1>
+ 29c:	09 95       	icall
+ 29e:	ff 91       	pop	r31
+ 2a0:	ef 91       	pop	r30
+ 2a2:	bf 91       	pop	r27
+ 2a4:	af 91       	pop	r26
+ 2a6:	9f 91       	pop	r25
+ 2a8:	8f 91       	pop	r24
+ 2aa:	7f 91       	pop	r23
+ 2ac:	6f 91       	pop	r22
+ 2ae:	5f 91       	pop	r21
+ 2b0:	4f 91       	pop	r20
+ 2b2:	3f 91       	pop	r19
+ 2b4:	2f 91       	pop	r18
+ 2b6:	0f 90       	pop	r0
+ 2b8:	0f be       	out	0x3f, r0	; 63
+ 2ba:	0f 90       	pop	r0
+ 2bc:	1f 90       	pop	r1
+ 2be:	18 95       	reti
+
+000002c0 <__vector_6>:
+}
+
+/* ISR for ICR event */
+void __vector_6(void){
+ 2c0:	1f 92       	push	r1
+ 2c2:	0f 92       	push	r0
+ 2c4:	0f b6       	in	r0, 0x3f	; 63
+ 2c6:	0f 92       	push	r0
+ 2c8:	11 24       	eor	r1, r1
+ 2ca:	2f 93       	push	r18
+ 2cc:	3f 93       	push	r19
+ 2ce:	4f 93       	push	r20
+ 2d0:	5f 93       	push	r21
+ 2d2:	6f 93       	push	r22
+ 2d4:	7f 93       	push	r23
+ 2d6:	8f 93       	push	r24
+ 2d8:	9f 93       	push	r25
+ 2da:	af 93       	push	r26
+ 2dc:	bf 93       	push	r27
+ 2de:	ef 93       	push	r30
+ 2e0:	ff 93       	push	r31
+	/*Execute The  ISR [User Routine] */
+	G_PTRF_TIM1_ICF();
+ 2e2:	e0 91 6c 00 	lds	r30, 0x006C	; 0x80006c <G_PTRF_TIM1_ICF>
+ 2e6:	f0 91 6d 00 	lds	r31, 0x006D	; 0x80006d <G_PTRF_TIM1_ICF+0x1>
+ 2ea:	09 95       	icall
+}
+ 2ec:	ff 91       	pop	r31
+ 2ee:	ef 91       	pop	r30
+ 2f0:	bf 91       	pop	r27
+ 2f2:	af 91       	pop	r26
+ 2f4:	9f 91       	pop	r25
+ 2f6:	8f 91       	pop	r24
+ 2f8:	7f 91       	pop	r23
+ 2fa:	6f 91       	pop	r22
+ 2fc:	5f 91       	pop	r21
+ 2fe:	4f 91       	pop	r20
+ 300:	3f 91       	pop	r19
+ 302:	2f 91       	pop	r18
+ 304:	0f 90       	pop	r0
+ 306:	0f be       	out	0x3f, r0	; 63
+ 308:	0f 90       	pop	r0
+ 30a:	1f 90       	pop	r1
+ 30c:	18 95       	reti
+
+0000030e <__vector_9>:
+/* ISR for OVF event */
+void __vector_9(void){
+ 30e:	1f 92       	push	r1
+ 310:	0f 92       	push	r0
+ 312:	0f b6       	in	r0, 0x3f	; 63
+ 314:	0f 92       	push	r0
+ 316:	11 24       	eor	r1, r1
+ 318:	2f 93       	push	r18
+ 31a:	3f 93       	push	r19
+ 31c:	4f 93       	push	r20
+ 31e:	5f 93       	push	r21
+ 320:	6f 93       	push	r22
+ 322:	7f 93       	push	r23
+ 324:	8f 93       	push	r24
+ 326:	9f 93       	push	r25
+ 328:	af 93       	push	r26
+ 32a:	bf 93       	push	r27
+ 32c:	ef 93       	push	r30
+ 32e:	ff 93       	push	r31
+	/*Execute The  ISR [User Routine] */
+	G_PTRF_TIM1_OVF();
+ 330:	e0 91 6a 00 	lds	r30, 0x006A	; 0x80006a <G_PTRF_TIM1_OVF>
+ 334:	f0 91 6b 00 	lds	r31, 0x006B	; 0x80006b <G_PTRF_TIM1_OVF+0x1>
+ 338:	09 95       	icall
+ 33a:	ff 91       	pop	r31
+ 33c:	ef 91       	pop	r30
+ 33e:	bf 91       	pop	r27
+ 340:	af 91       	pop	r26
+ 342:	9f 91       	pop	r25
+ 344:	8f 91       	pop	r24
+ 346:	7f 91       	pop	r23
+ 348:	6f 91       	pop	r22
+ 34a:	5f 91       	pop	r21
+ 34c:	4f 91       	pop	r20
+ 34e:	3f 91       	pop	r19
+ 350:	2f 91       	pop	r18
+ 352:	0f 90       	pop	r0
+ 354:	0f be       	out	0x3f, r0	; 63
+ 356:	0f 90       	pop	r0
+ 358:	1f 90       	pop	r1
+ 35a:	18 95       	reti
+
+0000035c <_exit>:
+ 35c:	f8 94       	cli
+
+0000035e <__stop_program>:
+ 35e:	ff cf       	rjmp	.-2      	; 0x35e <__stop_program>

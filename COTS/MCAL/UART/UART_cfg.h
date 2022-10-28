@@ -1,0 +1,43 @@
+/*
+ * UART_cfg.h
+ *
+ * Created: 9/21/2022 1:55:38 PM
+ *  Author: MICHAEL
+ */ 
+
+
+#ifndef UART_CFG_H_
+#define UART_CFG_H_
+
+/* UART Mode options 
+	1- UART_ASYNCHRONOUS_MODE
+	2- UART_SYNCHRONOUS_MODE
+*/
+#define UART_SET_MODE UART_ASYNCHRONOUS_MODE
+
+/* UPM bits Settings
+*	1- UART_DISABLED_PARITY 
+*	2- UART_EVEN_PARITY
+	3- UART_ODD_PARITY
+*/
+#define UART_SET_PARITY UART_DISABLED_PARITY
+
+/* UART Stop bit options 
+	1- UART_STOP_ONE_BIT
+	2- UART_STOP_TWO_BIT
+*/
+#define UART_SET_STOP_BIT UART_STOP_ONE_BIT
+
+/* UART CHR size options 
+	1- UART_CHR_SIZE_5
+	2- UART_CHR_SIZE_6
+	3- UART_CHR_SIZE_7
+	4- UART_CHR_SIZE_8
+	5- UART_CHR_SIZE_9
+*/
+#define UART_SET_CHR_SIZE UART_CHR_SIZE_8
+
+
+
+
+#endif /* UART_CFG_H_ */
