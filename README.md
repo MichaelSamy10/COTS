@@ -1,6 +1,5 @@
-## COTS
 ## Atmega32 Drivers:<br/>
-* Software Architecture Layers:
+## Software Architecture Layers:
 * MCAL: (Microcontroller Abstraction Layer)<br/>
   * DIO<br/>
   * GIE<br/>
